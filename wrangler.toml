@@ -1,12 +1,12 @@
-name = "arys-ai-worker"
+name = "ubiquitous-waddle"
 main = "worker/index.js"
 compatibility_date = "2026-07-15"
 workers_dev = true
 minify = true
 
 [vars]
-APP_URL = "https://super-octo-broccoli.ackcrp.workers.dev"
-GITHUB_REPO = "https://github.com/arystal010/super-octo-broccoli"
+APP_URL = "https://ubiquitous-waddle.ackcrp.workers.dev"
+GITHUB_REPO = "https://github.com/arystal010/ubiquitous-waddle"
 
 # Add your OpenRouter API key as a secret (never put it here):
 # wrangler secret put OPENROUTER_API_KEY
