@@ -1,0 +1,29 @@
+# ArysAI Cline Rules
+
+## Project structure
+- Worker code: worker/ (Cloudflare Worker, ES modules, no bundler)
+- Production frontend: docs/ (GitHub Pages, ES module imports, no bundler)
+- Minimal frontend: frontend/ (standalone, no framework, no bundler)
+
+## Coding standards
+- ES module syntax everywhere (import/export) — no require()
+- Never commit API keys — use `wrangler secret put` for secrets
+- All worker responses must include CORS headers from getCorsHeaders()
+- Worker SSE events must use the schema in worker/utils.js:
+    {type: "text", content: "..."} | {type: "search", status: {...}}
+    | {type: "done"} | {type: "error", error: "..."}
+- docs/js/utils.js must only export pure utility functions — never re-export
+  from other modules (config, api, markdown) to avoid circular imports
+
+## Dependencies
+- No browser automation libs (puppeteer, selenium) in production deps
+- Worker has no npm dependencies at runtime — Cloudflare Workers API only
+
+## Deployment
+- Worker: `npm run deploy` (wrangler deploy)
+- Frontend: push to main → GitHub Actions publishes docs/ to Pages
+- Bump version in docs/js/config.js and worker file headers on each release
+
+## Testing
+- Worker locally: `wrangler dev`
+- Frontend locally: `npx serve docs` (port 8788 to match wrangler proxy)
